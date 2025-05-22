@@ -46,12 +46,12 @@
 
 import Navbar from '@/components/Navbar';
 import '../styles/globals.css';
-import { Providers } from './providers'; // adjust path if needed
+import { Providers } from './providers'; // created earlier
 
 
 export const metadata = {
   title: 'Travel Blog',
-  description: 'Explore, travel, and save!',
+  description: 'Explore the world on a budget!',
 };
 
 export default function RootLayout({ children }) {
@@ -70,18 +70,29 @@ export default function RootLayout({ children }) {
 
 
 
+
+
+
+
+
 // import Navbar from '@/components/Navbar';
-// import { SessionProviderWrapper } from '@/components/SessionProviderWrapper';
-// import "../styles/globals.css";
+// import '../styles/globals.css';
+// import { Providers } from './providers'; // adjust path if needed
+
+
+// export const metadata = {
+//   title: 'Travel Blog',
+//   description: 'Explore, travel, and save!',
+// };
 
 // export default function RootLayout({ children }) {
 //   return (
 //     <html lang="en">
 //       <body>
-//         <SessionProviderWrapper>
-//           <Navbar />
+//         <Providers>
+//           <Navbar/>
 //           {children}
-//         </SessionProviderWrapper>
+//         </Providers>
 //       </body>
 //     </html>
 //   );
