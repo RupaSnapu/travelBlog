@@ -145,7 +145,6 @@
 //   return <CountrySlideshow countries={countries} />;
 // }
 
-
 'use client';
 
 import { useSession } from 'next-auth/react';
@@ -162,14 +161,37 @@ export default function CountriesPage() {
     }
   }, [status, router]);
 
-  if (status === 'loading') return <p>Loading session...</p>;
-  if (!session) return null;
+  if (status === 'loading') return <p>Loading...</p>;
+  if (!session) return null; // Prevent flash of content while redirecting
 
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-4">Countries</h1>
-      <p>Welcome, {session.user.name}!</p>
-      <p>This is the Countries page – only visible when logged in.</p>
+    <div className="p-6 max-w-5xl mx-auto">
+      <h1 className="text-4xl font-bold mb-6">Explore Countries</h1>
+      <p className="mb-6">Welcome, {session.user.name}!</p>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <CountryCard 
+          name="France" 
+          description="Explore the Eiffel Tower and Parisian cafés." 
+        />
+        <CountryCard 
+          name="Japan" 
+          description="Visit Tokyo, Kyoto, and Mount Fuji." 
+        />
+        <CountryCard 
+          name="Brazil" 
+          description="Discover Rio Carnival and Amazon Rainforest." 
+        />
+      </div>
+    </div>
+  );
+}
+
+function CountryCard({ name, description }) {
+  return (
+    <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow">
+      <h2 className="text-2xl font-semibold mb-2">{name}</h2>
+      <p>{description}</p>
     </div>
   );
 }
