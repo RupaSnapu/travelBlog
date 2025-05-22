@@ -44,14 +44,38 @@
 // }
 
 
+// import Navbar from '@/components/Navbar';
+// import '../styles/globals.css';
+// import { Providers } from './providers'; // created earlier
+
+
+// export const metadata = {
+//   title: 'Travel Blog',
+//   description: 'Explore the world on a budget!',
+// };
+
+// export default function RootLayout({ children }) {
+//   return (
+//     <html lang="en">
+//       <body>
+//         <Providers>
+//           <Navbar/>
+//           {children}
+//         </Providers>
+//       </body>
+//     </html>
+//   );
+// }
+
+
 import Navbar from '@/components/Navbar';
 import '../styles/globals.css';
-import { Providers } from './providers'; // created earlier
 
+import { Providers } from './providers';
 
 export const metadata = {
   title: 'Travel Blog',
-  description: 'Explore the world on a budget!',
+  description: 'Explore countries and budget travel tips!',
 };
 
 export default function RootLayout({ children }) {
@@ -59,16 +83,15 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Providers>
-          <Navbar/>
-          {children}
+          <Navbar />
+          <main>{children}</main>
         </Providers>
       </body>
     </html>
   );
 }
 
-
-
+// ruap
 
 
 

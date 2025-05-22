@@ -128,19 +128,48 @@
 
 
 // This runs on the server side during SSR
-import CountrySlideshow from './CountrySlideshow';
+// import CountrySlideshow from './CountrySlideshow';
 
-export default async function CountriesPage() {
-  const res = await fetch('https://restcountries.com/v3.1/all');
+// export default async function CountriesPage() {
+//   const res = await fetch('https://restcountries.com/v3.1/all');
 
-  if (!res.ok) {
-    throw new Error('Failed to fetch countries');
-  }
+//   if (!res.ok) {
+//     throw new Error('Failed to fetch countries');
+//   }
 
-  const countries = await res.json();
+//   const countries = await res.json();
 
-  // Optional: sort by name for consistency
-  countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
+//   // Optional: sort by name for consistency
+//   countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
 
-  return <CountrySlideshow countries={countries} />;
+//   return <CountrySlideshow countries={countries} />;
+// }
+
+
+'use client';
+
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+
+export default function CountriesPage() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/login');
+    }
+  }, [status, router]);
+
+  if (status === 'loading') return <p>Loading session...</p>;
+  if (!session) return null;
+
+  return (
+    <div className="p-6">
+      <h1 className="text-3xl font-bold mb-4">Countries</h1>
+      <p>Welcome, {session.user.name}!</p>
+      <p>This is the Countries page – only visible when logged in.</p>
+    </div>
+  );
 }
