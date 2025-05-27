@@ -4,7 +4,7 @@ import TextareaField from './TextareaField.jsx';
 
 
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Windowstime from './windowstime';
 
 export default function ContactPage() {
@@ -12,7 +12,6 @@ export default function ContactPage() {
   const [isTyping, setIsTyping] = useState(false);
   const [isHoveringSubmit, setIsHoveringSubmit] = useState(false);
 
-  // Reset typing after 1.2s of no input
   const handleInput = () => {
     setIsTyping(true);
     clearTimeout(window.typingTimeout);
@@ -30,9 +29,11 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen items-center justify-center bg-gradient-to-br from-amber-50 to-amber-200 p-6">
-      <div className="relative flex mx-50 max-w-5xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden group">
-        <div className="w-48 bg-amber-300 flex flex-col justify-center items-center p-8">
+    <div className="min-h-screen items-center justify-center bg-gradient-to-br from-amber-50 to-amber-200 p-4 sm:p-6">
+      <div className="relative flex flex-col lg:flex-row max-w-full sm:max-w-2xl md:max-w-3xl lg:max-w-5xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden group">
+        
+        {/* Sidebar with bear */}
+        <div className="w-full lg:w-48 bg-amber-300 flex justify-center items-center p-6">
           <CuteAnimatedTeddyBear 
             isTyping={isTyping} 
             status={status} 
@@ -40,12 +41,13 @@ export default function ContactPage() {
           />
         </div>
 
+        {/* Form */}
         <form
           onSubmit={handleSubmit}
-          className={`flex-1 p-10 transition-transform duration-300
-            ${status === 'error' ? 'animate-shake' : 'group-hover:scale-[1.03]'}`}
+          className={`flex-1 p-6 sm:p-10 transition-transform duration-300 
+            ${status === 'error' ? 'animate-shake' : 'group-hover:scale-[1.02]'}`}
         >
-          <h1 className="text-5xl font-extrabold mb-10 text-amber-900 text-center select-none">
+          <h1 className="text-3xl sm:text-5xl font-extrabold mb-6 sm:mb-10 text-amber-900 text-center select-none">
             Contact Us
           </h1>
 
@@ -58,28 +60,32 @@ export default function ContactPage() {
             disabled={status === 'loading'}
             onMouseEnter={() => setIsHoveringSubmit(true)}
             onMouseLeave={() => setIsHoveringSubmit(false)}
-            className="w-full bg-amber-700 text-white py-4 rounded-xl font-semibold text-lg
+            className="w-full bg-amber-700 text-white py-3 sm:py-4 rounded-xl font-semibold text-base sm:text-lg
             shadow-md hover:bg-amber-800 active:bg-amber-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {status === 'loading' ? 'Sending...' : 'Send Message'}
           </button>
 
           {status === 'success' && (
-            <p className="mt-6 text-center text-green-700 font-semibold animate-fade-in-bounce">
+            <p className="mt-4 sm:mt-6 text-center text-green-700 font-semibold animate-fade-in-bounce">
               Message sent successfully!
             </p>
           )}
           {status === 'error' && (
-            <p className="mt-6 text-center text-red-600 font-semibold animate-shake">
+            <p className="mt-4 sm:mt-6 text-center text-red-600 font-semibold animate-shake">
               Oops! Something went wrong.
             </p>
           )}
         </form>
       </div>
-      <Windowstime className="mt-96"/>
+
+      <div className="mt-20 sm:mt-40 w-full">
+        <Windowstime />
+      </div>
     </div>
   );
 }
+
 
 // InputField and TextareaField components remain the same...
 
