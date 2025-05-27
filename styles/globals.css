@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+/* globals.css or button.css */
+.btn-custom {
+  @apply bg-indigo-600           /* Background color */
+         flex justify-center mx-auto   /* Center content inside button */
+         text-white              /* White text */
+         font-semibold           /* Semi-bold text */
+         py-2 px-6               /* Padding: y = 0.5rem, x = 1.5rem */
+         rounded-lg              /* Rounded corners */
+         shadow-md               /* Medium shadow */
+
+         hover:bg-indigo-700     /* Darker background on hover */
+         active:bg-indigo-800    /* Even darker on active/click */
+         focus:outline-none      /* Remove default focus outline */
+         focus:ring-2            /* Show ring on focus */
+         focus:ring-indigo-500;  /* Indigo colored ring */
+}
